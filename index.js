@@ -10,8 +10,8 @@ const port = process.env.PORT || 8800;
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 登入页面
-app.get('/login', function(req, res) {
-    res.sendFile(path.join(__dirname, 'public/login.html'));
+app.get('/signin', function(req, res) {
+    res.sendFile(path.join(__dirname, 'public/signin.html'));
 });
 // 账户页面
 app.get('/account', function(req, res) {
