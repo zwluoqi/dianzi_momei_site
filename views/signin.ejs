@@ -3,28 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %>登录页面| 酒馆Claude，角色扮演，情感陪聊，文字爱情</title>
+    <title><%= title %>|酒馆Claude，角色扮演，情感陪聊，文字爱情</title>
     <link rel="icon" href="/img/favicon.ico" >
     <link rel="stylesheet" href="/css/base.css">
     <link rel="stylesheet" href="/css/signin.css">
 </head>
 <body class="bg-black">
-    <nav class="navbar">
-        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50,10 a40,40 0 1,0 1,0 z" fill="black"></path><circle cx="35" cy="50" r="5" fill="white"></circle><circle cx="65" cy="50" r="5" fill="white"></circle><path d="M30,60 Q50,80 70,60" stroke="white" stroke-width="5" fill="transparent"></path><path d="M30,20 L50,5 L70,20" fill="black"></path><path d="M20,30 Q50,10 80,30 Q50,50 20,30 z" fill="black"></path></svg>
+    <nav>
+        <div class="navbar">
+            <div class="left-span">
+                <img src="./img/icon.svg" >
+            </div>
+            <div class="mddile-span">
+                <a href="/select">首页</a>
+                <a href="/account">账户</a>
+            </div>
+            <div class="right-span">
+                <a href="/logout">登出</a>
+            </div>
+        </div>
     </nav>
     <main>
         <div class="container">
-            <h2>用户登录</h2>
+            <button class="btn github">
+                <img src="./img/github.svg" />
+                Sign in Github
+            </button>
+            <div class="divider"></div>
             <form action="/signin" method="post">
                 <div class="form-group">
-                    <label for="email">邮箱地址:</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <label for="email">Email address:</label>
+                    <input placeholder="Your email address" type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">密码:</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <label for="password">Your password:</label>
+                    <input placeholder="Your password" type="password" class="form-control" id="password" name="password" required>
                 </div>
-                <button type="submit" class="btn btn-primary">登录</button>
+                <button type="submit" class="btn btn-primary">Sign in</button>
             </form>
         </div>
     </main>

@@ -15,17 +15,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // 登入页面
 app.get('/signin', function(req, res) {
-    res.render('signin', {title: 'Hey'});
+    res.render('signin', {title: '登录'});
 });
+
 // 账户页面
 app.get('/account', function(req, res) {
     // 如果没有登入需要redirec到登入页面
-    res.render('account', {title: 'Hey'});
+    res.render('account', {title: '我的账户'});
 });
+
 // 选择进入页面
 app.get('/select', function(req, res) {
     // 如果没有登入需要redirec到登入页面
-    res.render('select', {title: 'Hey'});
+    res.render('select', {title: '选择'});
+});
+
+// 选择进入页面
+app.get('/logout', function(req, res) {
+    // 如果没有登入需要redirec到登入页面
+    res.render('select', {title: '选择'});
 });
 
 // 启动服务，监听 3000 端口
