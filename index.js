@@ -23,6 +23,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 解析application/json 类型的请求体
 app.use(bodyParser.json());
 
+// 首页
+app.get('/', function(req, res) {
+    res.render('signin', {title: '登入'});
+});
+
 // 登入页面
 app.get('/signin', function(req, res) {
     if (!req.session.user) {
@@ -44,7 +49,7 @@ app.get('/account', function(req, res) {
     }
 });
 
-// 选择进入页面
+// 对话选择页面
 app.get('/select', function(req, res) {
     if (!req.session.user) {
         res.redirect('/signin');
@@ -54,10 +59,12 @@ app.get('/select', function(req, res) {
     }
 });
 
-// 选择进入页面
+// 退出
 app.get('/logout', function(req, res) {
-    // 如果没有登入需要redirec到登入页面
-    res.render('select', {title: '选择'});
+    // 销毁 session 中的用户信息
+    req.session.destroy((err) => {
+        res.redirect('/');
+    });
 });
 
 // API处理接口
