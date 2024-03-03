@@ -37,6 +37,11 @@ app.get('/signin', function(req, res) {
         res.render('account', {title: '我的账户'});
     }
 });
+app.get('/github_signin', function(req, res) {
+    const {code} = req.query;
+    res.json({code});
+});
+
 
 // 账户页面
 app.get('/account', function(req, res) {
