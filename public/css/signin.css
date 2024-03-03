@@ -12,12 +12,13 @@
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: .5rem;
 }
 
 .form-control {
     width: 284px;
-    padding: 8px;
+    padding: .5rem;
+    margin: .5rem 0;
     border: 1px solid #FFF;
     color: #fff;
     background-color: #000;
@@ -52,11 +53,23 @@
 .divider {
     background: #fff;
     display: block;
-    margin: 16px 0px;
+    margin: 1.5rem 0;
     height: 1px;
     width: 100%;
 }
 
+.btn.github:hover {
+    background-color: darkgray;
+}
 .btn:hover {
     background-color: #52525b;
+}
+.container .top-image {
+    width: 100%;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+.container .top-image img {
+    width: 100px;
+    height: 100px;
 }
