@@ -9,20 +9,7 @@
     <link rel="stylesheet" href="/css/signin.css">
 </head>
 <body class="bg-black">
-    <nav>
-        <div class="navbar">
-            <div class="left-span">
-                <img src="./img/icon.svg" >
-            </div>
-            <div class="mddile-span">
-                <a href="/select">首页</a>
-                <a href="/account">账户</a>
-            </div>
-            <div class="right-span">
-                <a href="/logout">登出</a>
-            </div>
-        </div>
-    </nav>
+    <%- include('header'); -%>
     <main>
         <div class="container">
             <div class="top-image">
@@ -33,7 +20,7 @@
                 Sign in Github
             </button>
             <div class="divider"></div>
-            <form action="/signin" method="post">
+            <form id="sigin-form"  method="post" onsubmit="handleSubmit(event)">
                 <div class="form-group">
                     <label for="email">Email address:</label>
                     <input placeholder="Your email address" type="email" class="form-control" id="email" name="email" required>
@@ -42,32 +29,11 @@
                     <label for="password">Your password:</label>
                     <input placeholder="Your password" type="password" class="form-control" id="password" name="password" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <button id="signin-btn" type="submit" class="btn btn-primary">Sign in</button>
             </form>
         </div>
     </main>
-    <footer class="footer">
-        <div class="top-items">
-            <div class="left-span">
-                <img src="./img/icon.svg" >
-                <span>电子魅魔</span>
-            </div>
-            <div class="mddile-span">
-                <a href="/">首页</a>
-                <a href="/#">Telegram 交流群</a>
-                <a href="/#">Telegram 机器人</a>
-                <a href="/#">联系开发者</a>
-            </div>
-            <div class="mddile-span">
-                <a href="/">法律</a>
-                <a href="/#">Privacy Policy</a>
-                <a href="/#">Terms of Use</a>
-            </div>
-        </div>
-        <div class="bottom-text">
-            电子魅魔 2024 | 云酒馆，Claude，角色扮演。
-        </div>
-    </footer>
+    <%- include('footer'); -%>
 </body>
 <script src="/js/signin.js"></script>
 </html>
