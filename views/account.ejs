@@ -28,7 +28,7 @@
                 <input type="text" value="test_name">
                 <div class="edit-bar">
                     最多64个字符。
-                    <button type="submit">更新名字</button>
+                    <button name="username" type="submit">更新名字</button>
                 </div>
             </div>
             <div class="card editable">
@@ -37,7 +37,7 @@
                 <input type="email" value="xsb@163.com">
                 <div class="edit-bar">
                     更改后我们将发送一封邮件进行验证。
-                    <button type="submit">更新电子邮箱</button>
+                    <button name="email" type="submit">更新电子邮箱</button>
                 </div>
             </div>
             <div class="card editable">
@@ -46,12 +46,12 @@
                 <input type="email" value="xsb@163.com">
                 <div class="edit-bar">
                     更改后老的API会作废。
-                    <button type="submit">更新API</button>
+                    <button name="api" type="submit">更新API</button>
                 </div>
             </div>
         </div>
     </main>
     <%- include('footer'); -%>
 </body>
-<script src="/js/signin.js"></script>
+<script src="/js/account.js"></script>
 </html>
