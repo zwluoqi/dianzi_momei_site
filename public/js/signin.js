@@ -2,6 +2,7 @@
 const signinForm = document.querySelector('#sigin-form');
 const githubBtn = document.querySelector('.btn.github');
 
+// 邮箱和密码登入
 function handleSubmit(event) {
     event.preventDefault();
     // 表单提交数据
@@ -22,7 +23,7 @@ function handleSubmit(event) {
     .then(({msg, errno}) => {
         if (errno === 0) {
             alert('登录成功');
-            window.location.href = './select';
+            window.location.href = './';
         }
         else {
             alert('登录失败' + msg);
@@ -33,6 +34,8 @@ function handleSubmit(event) {
 // github登入点击按钮跳转github登录授权页面
 githubBtn.addEventListener('click', function(e) {
     // 需要在github新建github授权登入的app，才能获取到client_id https://github.com/settings/developers
+    // 获取client_id教程 https://blog.csdn.net/xixihahalelehehe/article/details/125294535
+    // 整体接入流程 https://juejin.cn/post/6998348587797053447#heading-1
     const client_id = 'f391bdfda18c5fdd0e8c';
     location.href = [
         `https://github.com/login/oauth/authorize?client_id=${client_id}`,

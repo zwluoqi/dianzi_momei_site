@@ -6,16 +6,40 @@
     <title><%= title %>|酒馆Claude，角色扮演，情感陪聊，文字爱情</title>
     <link rel="icon" href="/img/favicon.ico" >
     <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/signin.css">
+    <link rel="stylesheet" href="/css/select.css">
 </head>
 <body class="bg-black">
     <%- include('header'); -%>
     <main>
         <div class="container">
-            选择界面
+            <h3>电子魅魔 | 酒馆claude</h3>
+            <p>请输入 Nalang API token以及昵称以继续。</p>
+            <form id="select-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="token">API Token</label>
+                    <input placeholder="请输入API Token" type="token" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="model">语言模型</label>
+                    <div class="form-control">
+                        <span id="select-text"></span>
+                        <select name="model" class="form-control" onchange="handleSelect(event)" >
+                            <option value="nalang-xl">nalang-xl</option>
+                            <option value="nalang-turbo">nalang-turbo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">昵称</label>
+                    <input placeholder="请输入昵称" type="text" class="form-control" id="password" name="name" required>
+                </div>
+                <button id="signin-btn" type="submit" class="btn btn-primary">
+                    进入酒馆世界！
+                </button>
+            </form>
         </div>
     </main>
     <%- include('footer'); -%>
 </body>
-<script src="/js/signin.js"></script>
+<script src="/js/select.js"></script>
 </html>

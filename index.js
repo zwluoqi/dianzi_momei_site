@@ -25,7 +25,12 @@ app.use(bodyParser.json());
 
 // 首页
 app.get('/', function(req, res) {
-    res.render('signin', {title: '登入'});
+    if (!req.session.user) {
+        res.render('signin', {title: '登入'});
+    }
+    else {
+        res.render('select', {title: '选择'});
+    }
 });
 
 // 登入页面
@@ -34,7 +39,7 @@ app.get('/signin', function(req, res) {
         res.render('signin', {title: '登入'});
     }
     else {
-        res.render('account', {title: '我的账户'});
+        res.redirect('/');
     }
 });
 app.get('/github_signin', function(req, res) {
@@ -88,6 +93,8 @@ app.post('/api/*', function(req, res) {
             // 登录成功，将用户信息保存到session中
             req.session.user = login_info.email;
             res.json({errno: 0, message: '登录成功'});
+
+            // 需要调用后端接口了
         } else {
             // 登录失败
             res.status(401).json({ message: '用户名或密码错误' });
