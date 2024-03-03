@@ -21,6 +21,10 @@ body {
     position: relative;
 }
 
+button {
+    border: none;
+}
+
 nav {
     position: sticky;
     top: 0;
@@ -61,14 +65,6 @@ nav {
 .navbar a {
     color: #fff;
     text-decoration: none;
-}
-
-main {
-    height: calc(90vh - 80px);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .footer {

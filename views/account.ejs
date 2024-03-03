@@ -6,13 +6,49 @@
     <title><%= title %>|酒馆Claude，角色扮演，情感陪聊，文字爱情</title>
     <link rel="icon" href="/img/favicon.ico" >
     <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/signin.css">
+    <link rel="stylesheet" href="/css/account.css">
 </head>
 <body class="bg-black">
     <%- include('header'); -%>
     <main>
         <div class="container">
-            我的账户信息
+            <h1>我的账户</h1>
+            <div class="card">
+                <h3 class="card-title">你的会员资格</h3>
+                <p class="card-content">会员功能尚未推出。</p>
+            </div>
+            <div class="card">
+                <h3 class="card-title">积分</h3>
+                <p class="card-content">剩余可用积分。</p>
+                <input disabled type="text" value="123123">
+            </div>
+            <div class="card editable">
+                <h3 class="card-title">你的名字</h3>
+                <p class="card-content">请输入你的全名或你愿意展示的昵称。</p>
+                <input type="text" value="test_name">
+                <div class="edit-bar">
+                    最多64个字符。
+                    <button type="submit">更新名字</button>
+                </div>
+            </div>
+            <div class="card editable">
+                <h3 class="card-title">你的电子邮箱</h3>
+                <p class="card-content">请输入你使用的电子邮箱。</p>
+                <input type="email" value="xsb@163.com">
+                <div class="edit-bar">
+                    更改后我们将发送一封邮件进行验证。
+                    <button type="submit">更新电子邮箱</button>
+                </div>
+            </div>
+            <div class="card editable">
+                <h3 class="card-title">你的API</h3>
+                <p class="card-content">用于软件开发或者使用APP。</p>
+                <input type="email" value="xsb@163.com">
+                <div class="edit-bar">
+                    更改后老的API会作废。
+                    <button type="submit">更新API</button>
+                </div>
+            </div>
         </div>
     </main>
     <%- include('footer'); -%>
