@@ -1,7 +1,7 @@
 const express = require('express');
 const apiRouter = express.Router();
 
-// API处理接口
+// API处理接口(实际匹配到/api/test)
 apiRouter.get('/test', function(req, res) {
     // 如果没有登入需要redirec到登入页面
     res.json({

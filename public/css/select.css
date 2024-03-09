@@ -34,6 +34,15 @@ main {
     display: block;
     margin-bottom: .5rem;
 }
+.form-group label a {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+.form-group label a:hover {
+    text-decoration: underline;
+}
+
 
 .form-control {
     width: 284px;

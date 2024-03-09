@@ -26,19 +26,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
 // 页面路由
-const pagePath = [
-    '/',
-    '/github_signin',
-    '/signin',
-    '/account',
-    '/select',
-    '/logout'
-];
+const pagePath = ['/', '/github_signin', '/signin', '/account', '/select', '/logout'];
 pagePath.forEach(path => app.get(path, pageRouter));
 // API路由处理
 app.use('/api', apiRouter);
 
 // 启动服务，监听端口
 app.listen(PORT, function() {
-    console.log(`App listening on port ${PORT}!`);
+    console.log(`${new Date} App listening on port ${PORT}!`);
 });

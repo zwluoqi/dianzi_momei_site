@@ -16,8 +16,10 @@
             <p>请输入 Nalang API token以及昵称以继续。</p>
             <form id="select-form" onsubmit="handleSubmit(event)">
                 <div class="form-group">
-                    <label for="token">API Token</label>
-                    <input placeholder="请输入API Token" type="token" class="form-control" id="email" name="email" required>
+                    <label for="token">
+                        <a href="/account" target="_blank">API Token</a>
+                    </label>
+                    <input placeholder="请输入API Token" type="password" class="form-control" id="apiToken" name="apiToken" required>
                 </div>
                 <div class="form-group">
                     <label for="model">语言模型</label>
@@ -31,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label for="name">昵称</label>
-                    <input placeholder="请输入昵称" type="text" class="form-control" id="password" name="name" required>
+                    <input placeholder="请输入昵称" type="text" class="form-control" id="name" name="name" required>
                 </div>
                 <button id="signin-btn" type="submit" class="btn btn-primary">
                     进入酒馆世界！

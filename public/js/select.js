@@ -4,30 +4,12 @@ const signinForm = document.querySelector('#select-form');
 // 邮箱和密码登入
 function handleSubmit(event) {
     event.preventDefault();
-    // 表单提交数据
-    const email = signinForm.querySelector('[name="email"]').value;
-    const password = signinForm.querySelector('[name="password"]').value;
-    const requestOptions = {
-        method: 'POST',
-        credentials: 'include',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            login_id: 'login_id_123123123',
-            channel: 'email',
-            login_info: {password, email}
-        })
-    };
-    fetch('./api/signin', requestOptions)
-    .then(response => response.json())
-    .then(({msg, errno}) => {
-        if (errno === 0) {
-            alert('登录成功');
-            window.location.href = './';
-        }
-        else {
-            alert('登录失败' + msg);
-        }
-    });
+    const apiToken = signinForm.querySelector('[name="apiToken"]').value;
+    const model = signinForm.querySelector('[name="model"]').value;
+    const nickname = signinForm.querySelector('[name="name"]').value;
+
+    alert(['apiToken=', apiToken,  'model=', model, 'nickname=', nickname].join(' '));
+    window.location.href = 'http://baidu.com/';
 }
 
 function handleSelect(e) {

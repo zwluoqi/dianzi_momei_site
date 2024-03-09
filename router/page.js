@@ -34,6 +34,7 @@ pageRouter.get('/github_signin', async function(req, res) {
                 code
             }
         });
+        console.log('access_token', access_token);
 
         if (access_token) {
             const {name, email, login, node_id} = await getData({
