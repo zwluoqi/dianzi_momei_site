@@ -15,6 +15,14 @@ const getConf = {
     maxBodyLength: Infinity
 };
 
+const API_MAP = {
+    SIGININ: 'https://sillywebmanagerdb.fucksillytavern.uk/user/login',
+    GETDATA: 'https://sillywebmanagerdb.fucksillytavern.uk/record/getdata',
+    SETDATA: 'https://sillywebmanagerdb.fucksillytavern.uk/record/setdata',
+    GITHUB_ACCESS_TOKEN: 'https://github.com/login/oauth/access_token',
+    GITHUB_USER: 'https://api.github.com/user'
+};
+
 const getData = data => {
     return new Promise((resolve, reject) => {
         const option = {...getConf, ...data};
@@ -42,5 +50,6 @@ const postData = data => {
 
 module.exports = {
     getData,
-    postData
+    postData,
+    API_MAP
 }

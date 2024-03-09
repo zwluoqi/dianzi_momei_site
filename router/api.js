@@ -1,6 +1,6 @@
 const express = require('express');
 const apiRouter = express.Router();
-const {postData} = require('../utils/index');
+const {postData, API_MAP} = require('../utils/index');
 
 // API处理接口(实际匹配到/api/test)
 apiRouter.get('/test', function(req, res) {
@@ -10,17 +10,18 @@ apiRouter.get('/test', function(req, res) {
     });
 });
 
+// 登入接口
 apiRouter.post('/signin', async function(req, res) {
-    // 如果没有登入需要redirec到登入页面
     const {channel = 'email', login_info} = req.body;
-    // 简单的验证逻辑
+    // 采用email验证码登入, 需要重新实现sigin逻辑
     if (login_info.email && login_info.password) {
         const signinData = await postData({
-            url: 'https://sillywebmanagerdb.fucksillytavern.uk/user/login',
+            url: API_MAP.SIGININ,
             data: {
-                // TODO: login_id具体生成逻辑是啥
+                // TODO: login_id使用github的默认id信息
                 login_id: login_info.email,
                 channel,
+                // 这个里面存储
                 login_info: JSON.stringify({
                     password: login_info.password,
                     email: login_info.email
@@ -38,10 +39,12 @@ apiRouter.post('/signin', async function(req, res) {
     }
 });
 
+// 更新账户数据
 apiRouter.post('/setdata', async function(req, res) {
     const {key, record} = req.body;
+    // TODO: 目前get set接口只能key value形式更新数据，整体统一为uid 对应 所有数据
     const setDataRes = await postData({
-        url: 'https://sillywebmanagerdb.fucksillytavern.uk/record/setdata',
+        url: API_MAP.SETDATA,
         data: {uid: req.session.uid, record, key}
     });
 

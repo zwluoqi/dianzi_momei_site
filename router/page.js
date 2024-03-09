@@ -1,6 +1,6 @@
 const express = require('express');
 const pageRouter = express.Router();
-const {postData, getData} = require('../utils/index');
+const {postData, getData, API_MAP} = require('../utils/index');
 
 // 首页
 pageRouter.get('/', function(req, res) {
@@ -22,12 +22,12 @@ pageRouter.get('/signin', function(req, res) {
     }
 });
 
-// github跳转登入
+// github验证回调接口
 pageRouter.get('/github_signin', async function(req, res) {
     const {code} = req.query;
     if (code) {
         const {access_token} = await postData({
-            url: 'https://github.com/login/oauth/access_token',
+            url: API_MAP.GITHUB_ACCESS_TOKEN,
             data: {
                 client_id: 'f391bdfda18c5fdd0e8c',
                 client_secret: 'ea20df43eb5eac78d2c9a89be3f40cf8b4708d5f',
@@ -37,30 +37,26 @@ pageRouter.get('/github_signin', async function(req, res) {
         console.log('access_token', access_token);
 
         if (access_token) {
-            const {name, email, login, node_id} = await getData({
-                url: 'https://api.github.com/user',
+            const githubUserData = await getData({
+                url: API_MAP.GITHUB_USER,
                 headers: {
                     Authorization: 'token ' + access_token
                 }
             });
+            const {login, id} = githubUserData;
 
             // 新注册用户
-            // email可能为空 name login基本都有的
-            const username = email || name || login;
+            const username = login + id;
             const signinData = {
-                login_id: node_id,
+                login_id: login + id,
                 channel: 'github',
-                login_info: JSON.stringify({
-                    email: username,
-                    // todo: 密码传啥?
-                    password: '123456'
-                })
+                login_info: JSON.stringify(githubUserData)
             };
             console.log('data', signinData);
 
             console.time();
             const {uid} = await postData({
-                url: 'https://sillywebmanagerdb.fucksillytavern.uk/user/login',
+                url: API_MAP.SIGININ,
                 data: signinData
             }).catch(err => {
                 console.log('err', err);
@@ -93,7 +89,7 @@ pageRouter.get('/account', async function(req, res) {
     }
     else {
         const userData = await postData({
-            url: 'https://sillywebmanagerdb.fucksillytavern.uk/record/getdata',
+            url: API_MAP.GETDATA,
             data: {
                 uid: req.session.uid,
                 key: 'name'
