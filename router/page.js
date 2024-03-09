@@ -4,7 +4,7 @@ const {postData, getData} = require('../utils/index');
 
 // 首页
 pageRouter.get('/', function(req, res) {
-    if (!req.session.user) {
+    if (!req.session.uid) {
         res.render('signin', {title: '登入'});
     }
     else {
@@ -14,7 +14,7 @@ pageRouter.get('/', function(req, res) {
 
 // 登入页面
 pageRouter.get('/signin', function(req, res) {
-    if (!req.session.user) {
+    if (!req.session.uid) {
         res.render('signin', {title: '登入'});
     }
     else {
@@ -22,7 +22,7 @@ pageRouter.get('/signin', function(req, res) {
     }
 });
 
-// github登入页面
+// github跳转登入
 pageRouter.get('/github_signin', async function(req, res) {
     const {code} = req.query;
     if (code) {
@@ -69,7 +69,7 @@ pageRouter.get('/github_signin', async function(req, res) {
 
             // { uid: 'silly-zjK9YRaodCiFfQh52m8gHqOG1YAkoLUC0d46YYP9' }
             if (uid) {
-                req.session.user = username;
+                req.session.uid = username;
                 res.redirect('/select');
             }
             else {
@@ -86,19 +86,35 @@ pageRouter.get('/github_signin', async function(req, res) {
 });
 
 // 账户页面
-pageRouter.get('/account', function(req, res) {
+pageRouter.get('/account', async function(req, res) {
     // 如果没有登入需要redirec到登入页面
-    if (!req.session.user) {
+    if (!req.session.uid) {
         res.redirect('/signin');
     }
     else {
-        res.render('account', {title: '我的账户'});
+        const userData = await postData({
+            url: 'https://sillywebmanagerdb.fucksillytavern.uk/record/getdata',
+            data: {
+                uid: req.session.uid,
+                key: 'name'
+            }
+        });
+        console.log('userData', userData);
+        
+        res.render('account', {
+            title: '我的账户',
+            coins: 56,
+            name: userData.record,
+            email: 'test@gmail.com',
+            apitoken: 'akakskskdkfakdjqe',
+            userData
+        });
     }
 });
 
-// 对话选择页面
+// 选择页面
 pageRouter.get('/select', function(req, res) {
-    if (!req.session.user) {
+    if (!req.session.uid) {
         res.redirect('/signin');
     }
     else {

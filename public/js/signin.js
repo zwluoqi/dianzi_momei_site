@@ -13,7 +13,6 @@ function handleSubmit(event) {
         credentials: 'include',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            login_id: 'login_id_123123123',
             channel: 'email',
             login_info: {password, email}
         })
