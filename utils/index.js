@@ -7,8 +7,7 @@ const postConf = {
     headers: { 
         'Content-Type': 'application/json',
         Accept: 'application/json'
-    },
-    data
+    }
 };
 
 const getConf = {
