@@ -13,7 +13,7 @@ apiRouter.get('/test', function(req, res) {
 // 登入接口
 apiRouter.post('/signin', async function(req, res) {
     const {channel = 'email', login_info} = req.body;
-    // 采用email验证码登入, 需要重新实现sigin逻辑
+    // TODO: 采用email + 验证码登入, 需要重新实现sigin逻辑
     if (login_info.email && login_info.password) {
         const signinData = await postData({
             url: API_MAP.SIGININ,
