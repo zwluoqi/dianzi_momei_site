@@ -42,10 +42,13 @@ apiRouter.post('/signin', async function(req, res) {
 // 更新账户数据
 apiRouter.post('/setdata', async function(req, res) {
     const {key, record} = req.body;
-    // TODO: 目前get set接口只能key value形式更新数据，整体统一为uid 对应 所有数据
     const setDataRes = await postData({
         url: API_MAP.SETDATA,
-        data: {uid: req.session.uid, record, key}
+        data: {
+            uid: req.session.uid,
+            key,
+            record: JSON.stringify(record)
+        }
     });
 
     res.status(200).json({errno: 0, message: '更新成功'});

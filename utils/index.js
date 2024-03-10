@@ -23,6 +23,13 @@ const API_MAP = {
     GITHUB_USER: 'https://api.github.com/user'
 };
 
+const DEF_USER_DATA = {
+    coins: 0,
+    username: 'test',
+    email: 'test@gmail.com',
+    apitoken: '0000-0000-0000-0000'
+};
+
 const getData = data => {
     return new Promise((resolve, reject) => {
         const option = {...getConf, ...data};
@@ -48,8 +55,20 @@ const postData = data => {
     })
 };
 
+const parseJSONSafely = str => {
+    try {
+        return JSON.parse(str);
+    }
+    catch (err) {
+        return {};
+    }
+};
+
+
 module.exports = {
     getData,
     postData,
-    API_MAP
+    API_MAP,
+    DEF_USER_DATA,
+    parseJSONSafely
 }

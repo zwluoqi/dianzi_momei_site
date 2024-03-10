@@ -1,5 +1,7 @@
 main {
     width: 100%;
+    position: relative;
+    z-index: 2;
 }
 
 
@@ -77,4 +79,23 @@ main {
     background-color: rgb(24, 24, 27);
     border-color: #fff;
     color: #fff;
+}
+.container .card .support-copy {
+    display: flex;
+    margin-top: 2rem;
+}
+.container .card .support-copy input {
+    margin-top: 0;
+}
+
+.container .card .support-copy .suffix-copy {
+    width: 100px;
+    height: 52px;
+    text-align: center;
+    background-color: #fff;
+    cursor: pointer;
+}
+.container .card .support-copy .suffix-copy img {
+    width: 20px;
+    height: 20px;
 }

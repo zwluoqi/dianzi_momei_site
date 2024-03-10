@@ -25,7 +25,7 @@
             <div class="card editable">
                 <h3 class="card-title">你的名字</h3>
                 <p class="card-content">请输入你的全名或你愿意展示的昵称。</p>
-                <input type="text" name="username" value="<%= name %>">
+                <input type="text" name="username" value="<%= username %>">
                 <div class="edit-bar">
                     最多64个字符。
                     <button name="username" type="submit">更新名字</button>
@@ -43,15 +43,23 @@
             <div class="card editable">
                 <h3 class="card-title">你的API-TOKEN</h3>
                 <p class="card-content">用于软件开发或者使用APP。</p>
-                <input type="text" name="apiToken" value="<%= apitoken %>" disabled>
+                <div class="support-copy">
+                    <input type="text" name="apiToken" value="<%= apitoken %>" disabled>
+                    <button class="suffix-copy" name="copy">
+                        <img src="./img/copy.svg" >
+                    </button>
+                </div>
                 <div class="edit-bar">
                     更改后老的API会作废。
-                    <button name="api" type="submit">更新API</button>
+                    <button name="apiToken" type="submit">更新API</button>
                 </div>
             </div>
         </div>
     </main>
     <%- include('footer'); -%>
 </body>
+<script type="text/javascript">
+    var userData = <%- JSON.stringify(userData) %>;
+</script>
 <script src="/js/account.js"></script>
 </html>
