@@ -26,6 +26,7 @@ pageRouter.get('/signin', function(req, res) {
 pageRouter.get('/github_signin', async function(req, res) {
     const {code} = req.query;
     if (code) {
+        // 1. 获取access_token
         const {access_token} = await postData({
             url: API_MAP.GITHUB_ACCESS_TOKEN,
             data: {
@@ -33,9 +34,11 @@ pageRouter.get('/github_signin', async function(req, res) {
                 client_secret: 'ea20df43eb5eac78d2c9a89be3f40cf8b4708d5f',
                 code
             }
+        }).catch(err => {
+            res.status(500).send('github access_token fail' + JSON.stringify(err));
+            return;
         });
         console.log('access_token', access_token);
-
         if (access_token) {
             const githubUserData = await getData({
                 url: API_MAP.GITHUB_USER,
@@ -43,12 +46,12 @@ pageRouter.get('/github_signin', async function(req, res) {
                     Authorization: 'token ' + access_token
                 }
             }).catch(err => {
-                res.status(500).send('github user data error');
+                res.status(500).send('github user data fail' + JSON.stringify(err));
                 return;
             });
             const {login, id, name, email} = githubUserData;
 
-            // 1.注册接口调用
+            // 2.调用注册接口
             console.log('data', githubUserData);
             const username = login + '-' + id;
             const signinData = {
@@ -56,17 +59,15 @@ pageRouter.get('/github_signin', async function(req, res) {
                 channel: 'github',
                 login_info: JSON.stringify(githubUserData)
             };
-            console.time();
             const signinRes = await postData({
                 url: API_MAP.SIGININ,
                 data: signinData
             }).catch(err => {
-                res.status(500).send('/user/login error');
+                res.status(500).send('request /user/login fail' + JSON.stringify(err));
                 return;
             });
-            console.timeEnd();
 
-            // 2.setdata接口调用,记录用户信息
+            // 3.setdata接口调用,记录用户信息
             const setRes = await postData({
                 url: API_MAP.SETDATA,
                 data: {
@@ -80,27 +81,21 @@ pageRouter.get('/github_signin', async function(req, res) {
                     key: 'main'
                 }
             }).catch(err => {
-                res.status(500).send('/record/setdata error');
+                res.status(500).send('request  /record/setdata fail' + JSON.stringify(err));
                 return;
             });
 
             console.log('setRes', setRes);
-            
+
             if (setRes) {
                 req.session.uid = username;
                 res.redirect('/select');
-            }
-            else {
-                res.redirect('/signin');
+                return;
             }
         }
-        else {
-            res.redirect('/');
-        }
     }
-    else {
-        res.redirect('/');
-    }
+    // 如果上述步骤有报错，最后返回首页
+    res.redirect('/');
 });
 
 // 账户页面
