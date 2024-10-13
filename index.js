@@ -28,6 +28,7 @@ app.use(bodyParser.json());
 // 页面路由
 const pagePath = ['/', '/github_signin', '/signin', '/account', '/select', '/logout'];
 pagePath.forEach(path => app.get(path, pageRouter));
+
 // API路由处理
 app.use('/api', apiRouter);
 

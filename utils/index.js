@@ -16,11 +16,11 @@ const getConf = {
 };
 
 const API_MAP = {
-    SIGININ: 'https://sillywebmanagerdb.fucksillytavern.uk/user/login',
-    GETDATA: 'https://sillywebmanagerdb.fucksillytavern.uk/record/getdata',
-    SETDATA: 'https://sillywebmanagerdb.fucksillytavern.uk/record/setdata',
-    GITHUB_ACCESS_TOKEN: 'https://github.com/login/oauth/access_token',
-    GITHUB_USER: 'https://api.github.com/user'
+    SIGININ: process.env['SIGININ'],
+    GETDATA: process.env['GETDATA'],
+    SETDATA: process.env['SETDATA'],
+    GITHUB_ACCESS_TOKEN: process.env['GITHUB_ACCESS_TOKEN'],
+    GITHUB_USER: process.env['GITHUB_USER'],
 };
 
 const DEF_USER_DATA = {

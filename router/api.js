@@ -1,6 +1,6 @@
 const express = require('express');
 const apiRouter = express.Router();
-const {postData, API_MAP} = require('../utils/index');
+const {postData, API_MAP, parseJSONSafely} = require('../utils/index');
 
 // API处理接口(实际匹配到/api/test)
 apiRouter.get('/test', function(req, res) {
@@ -53,5 +53,54 @@ apiRouter.post('/setdata', async function(req, res) {
 
     res.status(200).json({errno: 0, message: '更新成功'});
 });
+
+
+// 获取酒馆地址
+apiRouter.post('/get_cloud_address', async function(req, res) {
+    console.log('get_cloud_address', req.query);
+    if (!req.session.uid) {
+        res.redirect('/signin');
+    }
+    else {
+        // res.render('select', {title: '选择'});
+        // const {key, record} = req.body;
+        let userData = await postData({
+            url: API_MAP.GETDATA,
+            data: {
+                uid: req.session.uid,
+                key: 'address'
+            }
+        });
+        let addressJson = parseJSONSafely(userData.record);
+        if(addressJson && addressJson.address){
+            // res.redirect(addressJson.address);
+            res.json({errno: 0, msg: addressJson.address});
+        }else{
+            // res.redirect('/');
+            // res.json({errno: -1, msg: '获取地址失败'});
+
+            //1.请求一个酒馆地址：
+
+
+
+
+            //2.保存到用户数据中
+            let userData = await postData({
+                url: API_MAP.SETDATA,
+                data: {
+                    uid: req.session.uid,
+                    key: 'address',
+                    record: JSON.stringify({
+                        address: 'http://127.0.0.1:8000'
+                    })
+                }
+            });
+
+            //返回新地址
+            res.json({errno: 0, msg: 'http://127.0.0.1:8000'});
+        }
+    }
+});
+
 
 module.exports = apiRouter;
