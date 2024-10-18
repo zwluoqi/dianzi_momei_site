@@ -1,5 +1,6 @@
 // 工具函数
 const axios = require('axios');
+require('dotenv').config();
 
 const postConf = {
     method: 'post',
@@ -16,6 +17,8 @@ const getConf = {
 };
 
 const API_MAP = {
+    SILLY_NGINX_SERVER:process.env['SILLY_NGINX_SERVER'],
+    SILLY_SERVER:process.env['SILLY_SERVER'],
     SIGININ: process.env['SIGININ'],
     GETDATA: process.env['GETDATA'],
     SETDATA: process.env['SETDATA'],
