@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const apiRouter = require('./router/api');
 const pageRouter = require('./router/page');
+const morgan = require('morgan'); // 引入morgan
 
 // 创建express应用
 const app = express();
@@ -20,6 +21,8 @@ app.use(session({
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// 使用morgan中间件记录请求日志
+app.use(morgan('combined'));
 // 设置静态文件目录
 app.use(express.static(path.join(__dirname, 'public')));
 // 解析application/json 类型的请求体

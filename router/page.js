@@ -112,12 +112,13 @@ pageRouter.get('/account', async function(req, res) {
                 key: 'main'
             }
         });
-
+        const userJson = parseJSONSafely(userData.record);
+        console.log('userJson',userJson)
         res.render('account', {
             title: '我的账户',
-            userData: parseJSONSafely(userData.record),
+            userData: userJson,
             ...DEF_USER_DATA,
-            ...parseJSONSafely(userData.record)
+            ...userJson
         });
     }
 });
